@@ -15,6 +15,7 @@ func cmath() {
 }
 
 func main() {
+  System.print("\n<Gravity scripting language>");
   System.print("Using Math: " + stdmath());
   System.print("Using CMath: " + cmath());
   return 0;
