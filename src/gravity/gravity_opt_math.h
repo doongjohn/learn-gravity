@@ -1,1 +1,0 @@
-/data/data/com.termux/files/home/programs/gravity/src/optionals/gravity_opt_math.h

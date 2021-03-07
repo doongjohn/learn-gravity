@@ -15,12 +15,24 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/")
 # set(CMAKE_C_FLAGS "")
 # set(CMAKE_CXX_FLAGS "")
 
-# find all .c files in ./src/gravity
-file(GLOB gravityapi "src/gravity/*.c")
-add_library(GravityApi "${gravityapi}")
+# find all gravity api files
+file(GLOB gravityapi
+	"$ENV{HOME}/programs/gravity/src/utils/*.c"
+	"$ENV{HOME}/programs/gravity/src/shared/*.c"
+	"$ENV{HOME}/programs/gravity/src/compiler/*.c"
+	"$ENV{HOME}/programs/gravity/src/optionals/*.c"
+	"$ENV{HOME}/programs/gravity/src/runtime/*.c"
+)
+add_library(GravityApi STATIC "${gravityapi}")
 target_link_libraries(GravityApi "-lm")
 
 # make executable
-include_directories("src/gravity")
+include_directories(
+	"~/programs/gravity/src/utils"
+	"~/programs/gravity/src/shared"
+	"~/programs/gravity/src/compiler"
+	"~/programs/gravity/src/optionals"
+	"~/programs/gravity/src/runtime"
+)
 add_executable("${PROJECT_NAME}" "src/main.c")
 target_link_libraries("${PROJECT_NAME}" GravityApi "-lm")
