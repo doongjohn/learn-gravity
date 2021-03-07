@@ -24,7 +24,6 @@ file(GLOB gravityapi
 	"$ENV{HOME}/programs/gravity/src/runtime/*.c"
 )
 add_library(GravityApi STATIC "${gravityapi}")
-target_link_libraries(GravityApi "-lm")
 
 # make executable
 include_directories(
