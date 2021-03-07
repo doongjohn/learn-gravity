@@ -1,0 +1,21 @@
+extern var CMath;
+
+func stdmath() {
+  var pi = Math.PI;
+  var n1 = Math.log(pi);
+	var n2 = Math.pow(pi, 2.12);
+	return n1 + n2;
+}
+
+func cmath() {
+  var pi = CMath.pi;
+  var n1 = CMath.log(pi);
+	var n2 = CMath.pow(pi, 2.12);
+	return n1 + n2;
+}
+
+func main() {
+  System.print("Using Math: " + stdmath());
+  System.print("Using CMath: " + cmath());
+  return 0;
+}

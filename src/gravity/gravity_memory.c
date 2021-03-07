@@ -1,0 +1,1 @@
+/data/data/com.termux/files/home/programs/gravity/src/shared/gravity_memory.c
