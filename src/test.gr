@@ -1,5 +1,7 @@
+// CMatg class is defined in main.c
 extern var CMath;
 
+// this uses gravity std Math class
 func stdmath() {
   var pi = Math.PI;
   var n1 = Math.log(pi);
@@ -7,6 +9,7 @@ func stdmath() {
 	return n1 + n2;
 }
 
+// this uses CMath class
 func cmath() {
   var pi = CMath.pi;
   var n1 = CMath.log(pi);
@@ -14,9 +17,13 @@ func cmath() {
 	return n1 + n2;
 }
 
+// main function
 func main() {
-  System.print("\n<Gravity scripting language>");
-  System.print("Using Math: " + stdmath());
+  System.print("\nGravity scripting language");
+  System.print("--------------------------\n");
+
+  System.print("Using  Math: " + stdmath());
   System.print("Using CMath: " + cmath());
+
   return 0;
 }
