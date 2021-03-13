@@ -9,29 +9,31 @@ project("learn-gravity" C)
 #       └-> this will be stored in ${PROJECT_NAME}
 
 # set output directory
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/")
+set(
+	CMAKE_RUNTIME_OUTPUT_DIRECTORY
+	"${CMAKE_SOURCE_DIR}/bin/")
 
 # set flags
 # set(CMAKE_C_FLAGS "")
 # set(CMAKE_CXX_FLAGS "")
 
+set(gravity_src_dir "$ENV{HOME}/programs/gravity/src")
+
 # find all gravity api files
-file(GLOB gravityapi
-	"$ENV{HOME}/programs/gravity/src/utils/*.c"
-	"$ENV{HOME}/programs/gravity/src/shared/*.c"
-	"$ENV{HOME}/programs/gravity/src/compiler/*.c"
-	"$ENV{HOME}/programs/gravity/src/optionals/*.c"
-	"$ENV{HOME}/programs/gravity/src/runtime/*.c"
-)
-add_library(GravityApi STATIC "${gravityapi}")
+file(GLOB gravity_api_files
+	"${gravity_src_dir}/utils/*.c"
+	"${gravity_src_dir}/shared/*.c"
+	"${gravity_src_dir}/compiler/*.c"
+	"${gravity_src_dir}/optionals/*.c"
+	"${gravity_src_dir}/runtime/*.c")
+add_library(GravityApi STATIC "${gravity_api_files}")
 
 # make executable
 include_directories(
-	"~/programs/gravity/src/utils"
-	"~/programs/gravity/src/shared"
-	"~/programs/gravity/src/compiler"
-	"~/programs/gravity/src/optionals"
-	"~/programs/gravity/src/runtime"
-)
+	"${gravity_src_dir}/utils"
+	"${gravity_src_dir}/shared"
+	"${gravity_src_dir}/compiler"
+	"${gravity_src_dir}/optionals"
+	"${gravity_src_dir}/runtime")
 add_executable("${PROJECT_NAME}" "src/main.c")
 target_link_libraries("${PROJECT_NAME}" GravityApi "-lm")

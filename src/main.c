@@ -118,7 +118,7 @@ static bool math_pow(gravity_vm *vm, gravity_value_t *args, uint16_t nargs, uint
 }
 
 
-static void create_math_class(gravity_vm *vm) {
+static void create_class_cmath(gravity_vm *vm) {
     // setup class name
     static const char *CLASS_NAME = "CMath";
 
@@ -217,9 +217,9 @@ int main(void) {
     gravity_compiler_free(compiler);
 
     // create a new math class with methods and properties and register it to the VM
-    create_math_class(vm);
+    create_class_cmath(vm);
 
-    // Math class is now available from Gravity code so we can start excuting previously compiled closure
+    // CMath class is now available from Gravity code so we can start excuting previously compiled closure
     if (gravity_vm_runmain(vm, closure)) {
         // how to check `gravity_value_t`
         // https://github.com/marcobambini/gravity/blob/3f63ef231c1f6c8d8446c9651e09ca023fc41cdf/src/shared/gravity_value.c#L2057
