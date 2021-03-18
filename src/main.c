@@ -204,6 +204,7 @@ static void create_class_cmath(gravity_vm *vm) {
 
 inline
 static const char** get_optional_classes() {
+	// these classes will not be exported automatically
 	static const char *list[] = {
 		"CMath",
 		NULL // why is this necessary???
@@ -212,10 +213,21 @@ static const char** get_optional_classes() {
 }
 
 
+typedef struct txtfile_t {
+	size_t len;
+	char *txt;
+} TxtFile;
+
+TxtFile read_txtfile(char *file_path) {
+	TxtFile result = { .len = 0, .txt = "" };
+	result.txt = read_file(file_path, &result.len);
+	return result;
+}
+
+
 int main(void) {
 	// read gravity source file
-	size_t source_len = 0;
-	char *source = read_file("./src/test.gr", &source_len);
+	TxtFile source = read_txtfile("./src/test.gr");
 
 	// setup a delegate
 	gravity_delegate_t delegate = {
@@ -225,8 +237,8 @@ int main(void) {
 
 	// compile source into a closure
 	gravity_compiler_t *compiler = gravity_compiler_create(&delegate);
-	gravity_closure_t *closure = gravity_compiler_run(compiler, source, strlen(source), 0, true, true);
-	free(source);
+	gravity_closure_t *closure = gravity_compiler_run(compiler, source.txt, source.len, 0, true, true);
+	free(source.txt);
 	if (!closure) {
 		printf("failed to create gravity closure\n");
 		exit(1);
@@ -257,7 +269,8 @@ int main(void) {
 		printf("(GRAVITY VM) TIME TOOK: %.6f ms\n", t);
 	}
 
-	// our Math C class was not exposed to the GC (we passed NULL as vm parameter) so we would need to manually free it here
+	// our Math C class was not exposed to the GC (we passed NULL as vm parameter) 
+	// so we would need to manually free it here
 	// free class and its methods here
 
 	// free vm and base classes
